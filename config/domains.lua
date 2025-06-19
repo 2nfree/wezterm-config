@@ -7,7 +7,7 @@ return {
          name = 'wsl.ssh',
          remote_address = 'localhost',
          multiplexing = 'None',
-         default_prog = { 'fish', '-l' },
+         default_prog = { 'zsh', '-l' },
          assume_shell = 'Posix'
       }
    },
@@ -18,11 +18,11 @@ return {
    -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
    wsl_domains = {
       {
-         name = 'WSL:Ubuntu',
-         distribution = 'Ubuntu',
-         username = 'kevin',
-         default_cwd = '/home/kevin',
-         default_prog = { 'fish', '-l' },
+         name = 'Arch',
+         distribution = 'Arch',
+         username = 'komorebi',
+         default_cwd = '/home/komorebi',
+         default_prog = { 'zsh', '-l' },
       },
    },
 }

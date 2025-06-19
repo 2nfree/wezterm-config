@@ -1,6 +1,14 @@
 local gpu_adapters = require('utils.gpu-adapter')
 local backdrops = require('utils.backdrops')
 local colors = require('colors.custom')
+local wezterm = require('wezterm')
+local mux = wezterm.mux
+
+-- 初始窗口最大化
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
 
 return {
    max_fps = 120,
@@ -36,6 +44,8 @@ return {
    switch_to_last_active_tab_when_closing_tab = true,
 
    -- window
+   initial_cols = 120,
+   initial_rows = 40,
    window_padding = {
       left = 0,
       right = 0,
