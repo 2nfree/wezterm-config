@@ -4,11 +4,15 @@ return {
    ssh_domains = {
       -- yazi's image preview on Windows will only work if launched via ssh from WSL
       {
-         name = 'wsl.ssh',
-         remote_address = 'localhost',
+         name = 'Cloud',
+         remote_address = '119.45.166.87',
+         username = 'root',
+         timeout = 60,
          multiplexing = 'None',
-         default_prog = { 'zsh', '-l' },
-         assume_shell = 'Posix'
+         assume_shell = 'Posix',
+         ssh_option = {
+            identityfile = 'C:\\Users\\komorebi.xue\\.ssh\\id_rsa',
+         }
       }
    },
 
@@ -18,7 +22,7 @@ return {
    -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
    wsl_domains = {
       {
-         name = 'Arch',
+         name = 'WSL:Arch',
          distribution = 'Arch',
          username = 'komorebi',
          default_cwd = '/home/komorebi',
