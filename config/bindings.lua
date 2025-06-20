@@ -68,6 +68,21 @@ local keys = {
    },
    { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') }, -- CTRL + SHIFT + C 复制（兼容性配置）
    { key = 'v',          mods = 'CTRL',  action = act.PasteFrom('Clipboard') }, -- CTRL + V 粘贴
+   -- 大写复制
+   {
+      key = 'C',
+      mods = 'CTRL',
+      action = wezterm.action_callback(function(window, pane) -- CTRL + C 复制(如果选中则复制选中内容，否则是正常的 CTRL + C)
+        local sel = window:get_selection_text_for_pane(pane)
+        if sel and sel ~= '' then
+          window:perform_action(act.CopyTo 'Clipboard', pane)
+        else
+          window:perform_action(act.SendKey { key = 'C', mods = 'CTRL' }, pane)
+        end
+      end),
+   },
+   { key = 'C',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') }, -- CTRL + SHIFT + C 复制（兼容性配置）
+   { key = 'V',          mods = 'CTRL',  action = act.PasteFrom('Clipboard') }, -- CTRL + V 粘贴
 
    -- tabs --
    -- tabs spawn+close
