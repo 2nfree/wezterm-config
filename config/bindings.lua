@@ -54,8 +54,20 @@ local keys = {
    { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' }, -- SUPER + Backspace 向左移动
 
    -- copy/paste --
-   { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') }, -- CTRL + SHIFT + C 复制
-   { key = 'v',          mods = 'CTRL|SHIFT',  action = act.PasteFrom('Clipboard') }, -- CTRL + SHIFT + V 粘贴
+   {
+      key = 'c',
+      mods = 'CTRL',
+      action = wezterm.action_callback(function(window, pane) -- CTRL + C 复制(如果选中则复制选中内容，否则是正常的 CTRL + C)
+        local sel = window:get_selection_text_for_pane(pane)
+        if sel and sel ~= '' then
+          window:perform_action(act.CopyTo 'Clipboard', pane)
+        else
+          window:perform_action(act.SendKey { key = 'c', mods = 'CTRL' }, pane)
+        end
+      end),
+   },
+   { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') }, -- CTRL + SHIFT + C 复制（兼容性配置）
+   { key = 'v',          mods = 'CTRL',  action = act.PasteFrom('Clipboard') }, -- CTRL + V 粘贴
 
    -- tabs --
    -- tabs spawn+close
