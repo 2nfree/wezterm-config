@@ -83,8 +83,8 @@ local colorscheme = {
    },
    visual_bell = mocha.red,
    indexed = {
-      [16] = mocha.peach,
-      [17] = mocha.rosewater,
+      [208] = mocha.peach,
+      [217] = mocha.rosewater,
    },
    scrollbar_thumb = mocha.surface2,
    split = mocha.overlay0,
